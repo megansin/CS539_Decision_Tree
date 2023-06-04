@@ -314,13 +314,15 @@ class Tree(object):
         '''
         #########################################
         ## INSERT YOUR CODE HERE
-        key = x[t.i]
-        
-        if t.isleaf == False and key in t.C:
-            y = Tree.inference(t.C[key], x)            
-        
-        else:
+        if t.isleaf == True:
             y = t.p
+
+        else:
+            key = x[t.i]
+            if key in t.C:
+                y = Tree.inference(t.C[key], x)
+            else:
+                y = t.p
         #########################################
         return y
     
@@ -343,7 +345,7 @@ class Tree(object):
         Y = np.empty(X.shape[1], dtype=object)
 
         for i in range(X.shape[1]):
-            att_vec = X[:, i]        
+            att_vec = X[:, i]
             Y[i] = Tree.inference(t,att_vec)
         #########################################
         return Y
